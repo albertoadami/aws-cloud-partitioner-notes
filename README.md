@@ -1,0 +1,1 @@
+# aws-cloud-partitioner-notes
