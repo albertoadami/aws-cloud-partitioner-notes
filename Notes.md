@@ -4,6 +4,8 @@
 1. [Beginning before a Cloud](#introduction)
 2. [Identity and acess management (IAM)](#iam)
 3. [Virtual Private Cloud (VPC)](#vpc)
+4. [AWS Elastic Compute Cloud (EC2)](#ec2)
+5. [AWS Storage Services](#storage)
 
 
 ## Beginning before a Cloud <a name="introduction"></a>
@@ -75,3 +77,69 @@ To enable the access for an IAM user to a sepcific resource, we need to set a fu
  
  When you define a VPC you need to configure the IP adress range of the network. After you have defined the VPC you need to add one or more ***subnets***, that is a sub portion of the VPC. When you define the subnet you need also to select an Availablity Zone.
  For example you can define a VPC with IP range like 170.10.0.0/16 and two different subnets with 170.10.1.0/24 and 170.10.2.0/24 as IP ranges. 
+
+ When we wanted to run an EC2 instance for exmaple we need  to select a VPC and a subnet for that, when the EC2 instance will be run.
+
+ If some services/machines needs to be available in the public nework you need also to configure an ***Internet Gateway (IGW)***. 
+
+ ***Internet Gateway:*** a combiantion of hardware and software that provides you network with a route to the world outside of the VPC. You need to associate one IGW to a VPC to make some components available on the internet. In AWS we can have one IGW for each VPC.
+
+ The ***route tables*** contains a set of rules called routes, that are used to determine where network traffic is directed. They are associated with a subnet. In some scenario you need to have a public subnet and a private subnet, the public subnet it's the part of the VPC that is exposed on the internet, instead the private subnet it's not on the internet but maybe the public subnet can acces to their services/servers.
+
+ To enable the access of a public subnet in the internet, you need to add a rule into the route table associated with the public cloud that's enable the traffic between the IGW.
+
+ The rules in the route tables have a number, the first rules have more priority that the following ones.
+
+ To define some security rules on subnet level you need to configure the ***Network Access Control Level(NACL)***. NACL is a firewall/security layer on the subnet. It's responsibile to block some connection/traffic that's not allowed to enter on the subnet level. For example you can need to enable the SSH and HTTP only from some other subnet.
+
+ Exists also the concept of ***Security Group***, that's similar to the NACL but it's apply on an instance level (an EC2 machine for example). The security group is some extra check performed after the NACL to check if the network request is allowed.
+
+## AWS Elastic Compute Cloud (EC2) <a name="ec2"></a>
+EC2 is basically a computer. It provides computing capacity in the AWS cloud.
+EC2 can be used to launch how many computer servers you need, they can be configured from the AMI (Amazon Machine Image), AWS supports Windows or Linux servers.
+
+With EC2 you can be very flexible and delete some intances when you don't need them anymore (on Demand). It's possible to buy instances only for a set of time period (Reserved).
+
+You can configure the server with some different configurations of hardware, the configurations change the final price for the machine.
+
+***AMI*** is a pre-configured package to launch an EC2 instance. There are different types of AMIs:
+* community: free to use;
+* AWS marketpalce: pay to use;
+* my AMIs: create by yourself.
+
+When you launch an EC2 instance, a security group acts as a virutal firewall that controls the traffic for one or more instance. We can define multiple security groups for different use cases. Each EC2 instance can have only one security group associated.
+
+To connect to your EC2 instance via SSH, it has to be enable on security group level. When you create the instance you need to configure the key-value certification file (.pem) that you need to provide when you connect via ssh protocol.
+
+The command to connect to the instance is:
+```
+ssh -i "pem_file.pem" ec2-user@EC2-public-name
+```
+## AWS Storage Services <a name="storage"></a>
+***Simple Storage Service (S3):*** online, bulk storge service that you can access from almost any device. S3 it's the primary storage service on AWS, you can store any type of file on it.
+
+Buckets:
+1. Root level "folders" you create are referred as buckets;
+2. Any sub folder you create in a bucket is referred to as a folder;
+3. Files stored in a bucket are referred to as objects.
+
+The bucket names need to be unique along all AWS accounts. (not only yours)
+
+The objects can be stored directly on the bucket or in a folder inside it.
+
+You can configure S2 to encrypt the files. An other configuration it's the visibility level,  usually you don't want to configure S3 to have a public access on the internet.
+
+When you create a new S3 bucket you have to select an AWS region, the best practice is to select one region that's near the users of your application.
+
+Each S3 object has a "classification" assigned to it. The classification can be:
+* Standard: for frequent access;
+* Standard IA: infrequent access;
+* One Zone IA: infrequent access with AZ >=1;
+* Glacier: long ime archival (>= 90 days);
+* Glacier Deep Archive: long time (>= 180 days);
+* Reduced Redundancy: not reccomended;
+* Intelligent Tiering: long lived data with changing or unknown patterns.
+
+On S3 you can also configure a lifecycle rule, to change the classification class after some times. For example you can configure the classification rule of the provious version of a file to become a glacier.
+
+***AWS Storage Service*** is a way to integrate your cloud service with AWS cloud without migrate it. Application in your private cloud will connect to AWS cloud using a virtual server.
