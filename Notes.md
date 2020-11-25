@@ -6,6 +6,9 @@
 3. [Virtual Private Cloud (VPC)](#vpc)
 4. [AWS Elastic Compute Cloud (EC2)](#ec2)
 5. [AWS Storage Services](#storage)
+6. [Elastic Load Balancing (ELB)](#elb)
+7. [CloudFront and DNS](#dns)
+8. [Monitoring and Logging](#monitoring)
 
 
 ## Beginning before a Cloud <a name="introduction"></a>
@@ -143,3 +146,30 @@ Each S3 object has a "classification" assigned to it. The classification can be:
 On S3 you can also configure a lifecycle rule, to change the classification class after some times. For example you can configure the classification rule of the provious version of a file to become a glacier.
 
 ***AWS Storage Service*** is a way to integrate your cloud service with AWS cloud without migrate it. Application in your private cloud will connect to AWS cloud using a virtual server.
+
+## Elastic Load Balancing (ELB) <a name="elb"></a>
+***Elastic Load Balancing (ELB)*** disribuites traffic between multiple EC2 instances that are associaed with it. The traffic goes to the ELB that redirect the request to the appropiate EC2 IP adress.
+
+The ELB can contains multiple EC2 insance of different subnet, in different availability zones. In this way if we loose one AZ, the services remain available. We increase the fault tolerance of our applications. The ELB distribuite the traffic to all the EC2 instances associated with it in an equal way.
+
+***Auto scaling*** automates the process of adding or removing EC2 instances based on your applications traffic demand.
+For example we can configure that if the CPU usage of an instance is greater of a certain value (80 for example), then a new EC2 instance will be added. Also the maximum and minimum number of instances in an ELB can be configured.
+
+## CloudFront and DNS <a name="dns"></a>
+***Route53*** is the AWS service to configure and manage web domains for applications running on AWS. You can buy domains direcly from the AWS service.
+
+
+On Route53 you associate the domain with an IP adress(of a AWS machine). In this way someone from the internet world will call the domain name and the service is responsible to transalte it with the correct IP adress.
+
+Route53 also sends automated requests over the internet to your applications associated with it, to check if the services are available/running.
+
+***CloudFront*** is a content delivery network that allows you to store (cache) your content att "edge locations". This allows to your users to access the contents more quickly. The ***pointts of presence*** are in varius location of the world and in this way the users can access the content also it the original service is not working. The data of the original service will be propagated to all the poins of presence. Route53 can be configured to use CloudFront. If the request is not stored on the edge locations the request is forwareded to the original environment and the response is propagated to all the locations for future requests.
+
+## Monitoring and Logging <a name="monitoring"></a>
+***Cloudwatch*** is a service that allows you to monitor various elements of your AWS account. With it you can monitor your resources in real-time. You can configure Cloudwatch with tthe notification service to receive notification via email when an EC2 instance goes down for example.
+
+With Cloudwatch you need to configure a dashboard to view the metrics that you select. For example you can configure an alarm if CPU usage of EC2 instance goes up of 80%. Or you can configure an alarm also if the month billing exceed 500$.
+
+Instead ***Cloudtrail*** allows you to monitor all the actions taken by all IAM users into your AWS account. Cloudtrail allows also to see the history of actions taken in your account. You can see tthe recent events performed by all IAM users. 
+
+Cloudtrail saves the log into an S3 bucket using a gzip file format.
