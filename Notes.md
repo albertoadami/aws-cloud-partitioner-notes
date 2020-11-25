@@ -9,6 +9,13 @@
 6. [Elastic Load Balancing (ELB)](#elb)
 7. [CloudFront and DNS](#dns)
 8. [Monitoring and Logging](#monitoring)
+9. [Simple Notifications Services (SNS)](#sns)
+10. [Relational Database Service(RDS) and DynamoDB](#db)
+11. [Serverless](#lambda)
+12. [Security and Compliance Services](#security)
+13. [AWS Key Management Service (KNS)](#kns)
+14. [Other AWS Services](#others)
+15. [AWS Pricing, Billing and Support Services](#pricing)
 
 
 ## Beginning before a Cloud <a name="introduction"></a>
@@ -173,3 +180,80 @@ With Cloudwatch you need to configure a dashboard to view the metrics that you s
 Instead ***Cloudtrail*** allows you to monitor all the actions taken by all IAM users into your AWS account. Cloudtrail allows also to see the history of actions taken in your account. You can see tthe recent events performed by all IAM users. 
 
 Cloudtrail saves the log into an S3 bucket using a gzip file format.
+
+## Simple Notifications Service (SNS) <a name="sns"></a>
+***SNS*** is an AWS service that allows you to automate the sending of email/message notifications based on events that happen in your AWS account. Like said before can be cofnigured with the Cloudwatch service.
+
+In SNS there are two types of clients:
+* Subscribers: receive the message or nottification when they are subscribed ot a topic;
+* Publishers: communicate with the subscribers by sending a message to a topic.
+
+In SNS you can configure the topics from the AWS console. After that you need to add some subscriber to that topic.
+
+## Relational Database Service(RDS) and DynamoDB < a name = "db"></a>
+In the world there are two kind of databases:
+* Relational databases (SQL): RDS service;
+* Non-relatitonal databases (NO-SQL): DynamoDB service.
+
+***Relatitonal database service (RDS)*** is a SQL database service that provides a wide range of SQL database options to select from. You can select Amazon Aurora, MySQL, Postres, SQL Server, Oracle or MariaDB as a dabatabase.
+
+With RDS it's easy to setup and manager your databases on the cloud.
+
+Instead ***DyanmoDB*** is a NO-SQL database service, it does not provide other NO-SQL database options. It's a database similar to MongoDB or Cassandra. It save it's own data using a key-value structure with JSON as a value.
+
+***Elasticache*** is a cache service that can be used to improve your applications speed/performance. Elasticache supports Redis and Memcached. It allow you to deploy and configure easily the cache service instance.
+
+***Redshift*** is a data warehouse database service designed tto handle petabytes of data for analysis.
+
+## Serverless <a name= "lambda"></a>
+***Lambda*** is serverless computing. It is the next generation of cloud computing that will replace EC2 instances. It's a compute service that let's you run code without provisioning or managing servers. You pay only for the compute time that you consume.
+
+AWS Lambda supports Java, C#, Node.js, Ruby, Go, .NET Core and Python as programming languages.
+
+AWS manage all the infrastructure for you, one of the advantages of using serverless is that you don't need to mangage all the infrastructure where your code is running.
+
+## Security and Compliance Services <a name="security"></a>
+The ***Shared Responsibility Model*** defines that you (as AWS account) and AWS are reresponsible for when it comes to securiy and compliance.
+AWS is responsibile for the AWS layer and physical security. Instead AWS user is responsibile for the updates of the operating system/software.
+
+Many organizations required ***penetration testing***. Penetration testing is when the cloud is validated with tests that simulate attackers. There are some security tests that can be performed on AWS and some that are not allowed. Cloudfront is helping to mitigate DDOS attacks, because the user don't access to the EC2 instance directly.
+
+There are some AWS security services: AWS Organizations, AWS GuardDuty, AWS Inspector, AWS Shield, AWS Web Application Firewall and AWS Artifact.
+
+## AWS Key Management Service (KNS)
+***KNS*** enables encryption of data and provides centralized encryption, key storage, management and auditing. Using KNS the users cannot see the values without using a corret key.
+
+KNS integrates wiht other AWS services like S3, Storage Gateway, EBS, RDS, DynamoDB, SNS, CloudTrail.
+
+## Other AWS services <a name = "others"></a>
+Sometimes your organization need to conect from the on-premise data center yo the AWS VPC. ***AWS Direct Connect Location*** is a service that enable you to do that using a private connection.
+
+***Amazon Athen*** instead is a serverless query service used to analyze data in S3 using a SQL language for query data.
+
+***Amazon EMR*** is a AWS service that provides Hadoop framework.
+
+## AWS Pricing, Billing and Support Services <a name="pricing"></a>
+***AWS Organizations*** allows to handle billing for multiple AWS accounts from a single interface. If you are in a big organization the company can have multiple AWS accounts (one for department for example). Using AWS Organizations you can handle the billing in a more easily way (in a single user interface).
+
+In AWS you "pay-as-you-go", so you pay for the services that you are using. This allows you to remove/adapt services when you are not using them anymore. In this way you can pay less and save more money.
+
+For S3 service you pay for how much data you store and for request pricing (number of request using REST API).
+
+***Total Cost of Ownership (TCC)*** is a free tool that allow you to see the cost saving of using AWS instead that on premises solutions.
+
+***AWS Simple Calculator*** instead is a tool to estimate the AWS bill based on some scenario. The new version is called ***AWS Pricing Calculator***.
+
+***Cost Explorer*** is a free tool that allows you to view charts of your AWS costs.
+
+
+There are different kind of AWS accounts:
+* Basic: included with any AWS account;
+* Developer: 29$/month;
+* Business: 100$/month;
+* Enterprise: 15K$/month.
+
+There are differences for the AWS support, the enterprise and business accounts get 24/7 Cloud Support. Developer account instead gets business hours to access to a Cloud Supports. Basic instead don't have any access to a Cloud Support.
+
+***AWS Truster Advisor*** is a service that help you to optimize aspects of your AWS account. It helps you to reduce costs, increase performance and improve security.
+
+***AWS Whitepapers*** is a collection of technical documents that outline many AWS relevant topics. ***AWS Service Documentation*** instead is a collection of documents specific to each AWS service.
