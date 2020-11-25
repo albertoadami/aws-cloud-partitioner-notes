@@ -1,6 +1,5 @@
 # Notes for AWS Cloud Partitioner Certification
 
-# Table of contents
 1. [Beginning before a Cloud](#introduction)
 2. [Identity and acess management (IAM)](#iam)
 3. [Virtual Private Cloud (VPC)](#vpc)
